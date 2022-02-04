@@ -28,23 +28,21 @@ class _HistoryFragState extends State<HistoryFrag> {
       appBar: CustomAppBarFilter(
           dateTimeRange: dateTimeRange),
       backgroundColor: Colors.transparent,
-      body: FutureBuilder<List<ParkingHistoryModel>>(
-          future: DBControl.getParkingHistory(),
-          builder: (c, snap){
-            if(snap.data == null){
-              return const Center(
-                child: CircularProgressIndicator());
+      body: Obx((){
+        final start = rangeStart;
+        final end = rangeEnd;
 
-            }
+        return FutureBuilder<List<ParkingHistoryModel>>(
+            future: DBControl.getParkingHistory(start.millisecondsSinceEpoch,
+                end.millisecondsSinceEpoch),
+            builder: (c, snap){
+              if(snap.data == null){
+                return const Center(
+                    child: CircularProgressIndicator());
 
-            return Obx((){
-              final start = rangeStart;
-              final end = rangeEnd;
+              }
 
-              final list = snap.data!.where((item){
-                return item.dateTime!.isAfter(start) &&
-                    item.dateTime!.isBefore(end);
-              }).toList();
+              final list = snap.data!;
 
               return ListView.builder(
                   itemCount: list.length,
@@ -66,7 +64,7 @@ class _HistoryFragState extends State<HistoryFrag> {
                                 color: Colors.white)));
                   });
             });
-          }),
+      }),
     );
   }
 }

@@ -123,13 +123,15 @@ class DBControl{
     }
   }
 
-  static Future<List<ParkingHistoryModel>> getParkingHistory() async{
+  static Future<List<ParkingHistoryModel>> getParkingHistory(int milliSecondsStart, int milliSecondsEnd) async{
     final user = await getCurrentUser();
     final db = await _db;
 
     if(user != null){
       final _select = await db.rawQuery('SELECT * FROM parking_history '
-          'WHERE id_user = ? ORDER BY milliseconds DESC', [user.id]);
+          'WHERE id_user = ? AND milliseconds >= ? AND milliseconds <= ? '
+          'ORDER BY milliseconds DESC', [user.id,
+        milliSecondsStart, milliSecondsEnd]);
 
       return _select.map((item) => ParkingHistoryModel(
           item)).toList();
