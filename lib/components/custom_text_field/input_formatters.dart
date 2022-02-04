@@ -41,10 +41,10 @@ class PhoneInputFormatter extends TextInputFormatter {
     }
 
     if(v.length <= 10 && v.length > 1) {
-      v = v.getMaskared('## ####-####');
+      v = v.getMasked('## ####-####');
 
     } else if(v.length > 10) {
-      v = v.getMaskared('## #####-####');
+      v = v.getMasked('## #####-####');
 
     }
 
@@ -67,7 +67,7 @@ class DateInputFormatter extends TextInputFormatter {
       }
     }
 
-    v = v.getMaskared('##/##/####');
+    v = v.getMasked('##/##/####');
 
     return newValue.copyWith(
         text: v,

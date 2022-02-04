@@ -82,7 +82,7 @@ class TextFormatter{
 
       }
 
-      return result.getMaskared(mask);
+      return result.getMasked(mask);
 
     }catch(msg){
       return 'NULL';

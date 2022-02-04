@@ -36,7 +36,7 @@ extension Str on String {
 
   double get asDouble => (double.tryParse(toString()) ?? 0).toDouble();
 
-  String getMaskared(String mask, [k = 0, String maskared = '']){
+  String getMasked(String mask, [k = 0, String masked = '']){
     int cat = 0;
     int sum = 0;
 
@@ -44,7 +44,7 @@ extension Str on String {
       try{
         if(mask[i].toString() == '#'){
           if(length+sum >= i) {
-            maskared += this[i-sum];
+            masked += this[i-sum];
 
           }
 
@@ -54,7 +54,7 @@ extension Str on String {
 
             }
 
-            maskared += mask[i+1];
+            masked += mask[i+1];
             sum++;
             i++;
           }
@@ -71,6 +71,6 @@ extension Str on String {
       }
     }
 
-    return maskared;
+    return masked;
   }
 }

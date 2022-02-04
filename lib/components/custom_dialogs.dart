@@ -135,4 +135,41 @@ class CustomDialog {
 
     return toReturn;
   }
+
+  static Future<TimeOfDay?> getTimePicker(
+      {required BuildContext context, DateTime? dateTime}) async {
+    return await showTimePicker(
+        initialTime: TimeOfDay.fromDateTime(dateTime ?? DateTime.now()),
+        context: context);
+  }
+
+  static Future<DateTime?> getDatePicker({
+    required BuildContext context, DateTime? dateTime
+  }) async {
+    return await showDatePicker(
+        context: context,
+        initialDate: dateTime ?? DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100));
+  }
+
+  static Future<DateTime?> getDateTimePicker({
+    required BuildContext context, DateTime? dateTime
+  }) async {
+    final date = await getDatePicker(
+        context: context, dateTime: dateTime);
+
+    if (date == null) {
+      return null;
+
+    }
+
+    final hour = await getTimePicker(
+        context: context,
+        dateTime: dateTime);
+
+    return (hour != null)
+        ? DateTime(date.year, date.month, date.day, hour.hour, hour.minute)
+        : null;
+  }
 }

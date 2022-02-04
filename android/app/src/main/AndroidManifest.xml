@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cleancode.desafio.desafio_raro_labs">
    <application
-        android:label="desafio_raro_labs"
+        android:label="Desafio Raro Labs"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
